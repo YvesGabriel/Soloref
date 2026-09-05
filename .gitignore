@@ -1,0 +1,15 @@
+# Sobe para o Git apenas a pasta app/ (mais o README e o proprio .gitignore da raiz).
+# Tudo o mais na raiz (materiais/, trash/, etc.) fica de fora.
+/*
+!/.gitignore
+!/README.md
+!/app/
+
+# Dentro de app/: nao versionar ambiente virtual nem arquivos gerados.
+venv/
+__pycache__/
+*.pyc
+logs/
+.pytest_cache/
+RELATORIO_VALIDACAO.md
+.DS_Store
