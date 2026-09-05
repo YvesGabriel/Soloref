@@ -6,6 +6,8 @@
 import os
 import sys
 
+from PyInstaller.utils.hooks import collect_all
+
 block_cipher = None
 
 # Caminhos absolutos, independentes de onde o pyinstaller e chamado.
@@ -14,12 +16,16 @@ APP = os.path.abspath(os.path.join(SPECPATH, '..'))
 ASSETS = os.path.join(APP, 'assets')
 ICONE = os.path.join(ASSETS, 'icone.icns' if sys.platform == 'darwin' else 'icone.ico')
 
+# scipy carrega submodulos/bibliotecas dinamicamente -> coletar tudo
+# (senao o executavel falha com "No module named 'scipy'").
+_scipy_datas, _scipy_bins, _scipy_hidden = collect_all('scipy')
+
 a = Analysis(
     [os.path.join(APP, 'main.py')],
     pathex=[APP],
-    binaries=[],
-    datas=[(os.path.join(ASSETS, 'icone.png'), 'assets')],  # icone da janela em runtime
-    hiddenimports=[],                            # PySide6/scipy detectados automaticamente
+    binaries=_scipy_bins,
+    datas=[(os.path.join(ASSETS, 'icone.png'), 'assets')] + _scipy_datas,  # icone + dados do scipy
+    hiddenimports=_scipy_hidden,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

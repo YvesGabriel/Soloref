@@ -13,3 +13,7 @@ logs/
 .pytest_cache/
 RELATORIO_VALIDACAO.md
 .DS_Store
+
+# Saidas do PyInstaller (o executavel empacotado; pesado, nao versionar).
+dist/
+app/build/_work/
