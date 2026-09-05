@@ -3,6 +3,7 @@ REM Gera o executavel para Windows. Rode NO WINDOWS, com o venv ativo (entra em 
 REM   build\build_windows.bat  (de dentro de app\)  ou   app\build\build_windows.bat
 cd /d "%~dp0.."
 
+python -m pip install -r requirements.txt
 python -m pip install --upgrade pyinstaller
 if exist dist rmdir /s /q dist
 if exist build\_work rmdir /s /q build\_work

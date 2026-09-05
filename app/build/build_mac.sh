@@ -4,6 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+python3 -m pip install -r requirements.txt
 python3 -m pip install --upgrade pyinstaller
 rm -rf build/_work dist
 pyinstaller --clean --noconfirm --workpath build/_work build/soloref.spec
